@@ -93,13 +93,58 @@ def atualizar_pokemon(ID,novo_nome,novo_tipo,novo_nivel):
 
     with open("pokedex.json", "w") as f:
         json.dump(pokemons, f, indent=4)
+#Limpar pokedex
+def limpar_pokedex():
+    with open("pokedex.json", "w") as f:
+        json.dump([], f, indent=4)
+    print("Pokédex limpa com sucesso!")
+
+def buscar_por_nome(nome):
+    with open("pokedex.json", "r") as f:
+        pokemons = json.load(f)
+    
+    resultado = [p for p in pokemons if nome.lower() in p["nome"].lower()]
+    
+    if not resultado:
+        print(f"Nenhum pokémon encontrado com o nome '{nome}'!")
+    else:
+        quantidade = len(resultado)
+        if(quantidade == 1):
+            print(f"Foi encontrado {quantidade} pokémon com o nome '{nome}'!")
+        else:
+            print(f"Foram encontrados {quantidade} pokémon com o nome '{nome}'!")
+        for p in resultado:
+            print(f"ID: {p['id']}, Nome: {p['nome']}, Tipo: {p['tipo']}, Nível: {p['nivel']}")
+
+#Buscar pokemons
+def buscar_por_tipo(tipo):
+    with open("pokedex.json", "r") as f:
+        pokemons = json.load(f)
+    
+    resultado = [p for p in pokemons if p["tipo"].lower() == tipo.lower()]
+    
+    if not resultado:
+        print(f"Nenhum pokémon do tipo '{tipo}' encontrado!")
+    else:
+        if(len(resultado) == 1):
+            print(f"Foi encontrado 1 pokémon do tipo {tipo}!")
+        else:
+            print(f"Foram encontrados {len(resultado)} pokémon do tipo {tipo}!")
+        for p in resultado:
+            print(f"ID: {p['id']}, Nome: {p['nome']}, Tipo: {p['tipo']}, Nível: {p['nivel']}")
 
 def main():
-    adicionar_pokemon("Squirtle", "Agua", -1)
+    limpar_pokedex()
+    adicionar_pokemon("Pikachu", "Eletrico", 35)
     listar_pokemons()
     atualizar_pokemon(1, "Pikachu", "Eletrico", 101)
     listar_pokemons()
     remover_pokemon(1)
     listar_pokemons()
+
+    adicionar_pokemon("Pikachu", "Eletrico", 35)
+    adicionar_pokemon("Charmander", "Fogo", 10)
+    buscar_por_nome("pika")
+    buscar_por_tipo("Fogo")
 
 main()
