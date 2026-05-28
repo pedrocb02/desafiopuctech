@@ -88,6 +88,11 @@ def buscar_por_nome(nome):
     if not resultado:
         print(f"Nenhum pokémon encontrado com o nome '{nome}'!")
     else:
+        quantidade = len(resultado)
+        if(quantidade == 1):
+            print(f"Foi encontrado {quantidade} pokémon com o nome '{nome}'!")
+        else:
+            print(f"Foram encontrados {quantidade} pokémon com o nome '{nome}'!")
         for p in resultado:
             print(f"ID: {p['id']}, Nome: {p['nome']}, Tipo: {p['tipo']}, Nível: {p['nivel']}")
 
@@ -101,7 +106,10 @@ def buscar_por_tipo(tipo):
     if not resultado:
         print(f"Nenhum pokémon do tipo '{tipo}' encontrado!")
     else:
-        print(f"Foram encontrados {len(resultado)} pokémon do tipo {tipo}!")
+        if(len(resultado) == 1):
+            print(f"Foi encontrado 1 pokémon do tipo {tipo}!")
+        else:
+            print(f"Foram encontrados {len(resultado)} pokémon do tipo {tipo}!")
         for p in resultado:
             print(f"ID: {p['id']}, Nome: {p['nome']}, Tipo: {p['tipo']}, Nível: {p['nivel']}")
 
