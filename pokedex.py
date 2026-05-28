@@ -115,6 +115,6 @@ def main():
     adicionar_pokemon("Pikachu", "Eletrico", 35)
     adicionar_pokemon("Charmander", "Fogo", 10)
     buscar_por_nome("pika")
-    buscar_por_tipo("Agua")
+    buscar_por_tipo("Fogo")
 
 main()
