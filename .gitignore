@@ -1,0 +1,19 @@
+Python
+pycache/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+
+VSCode
+.vscode/
+
+Sistema
+.DS_Store
+Thumbs.db
+
+Dados de teste
+pokedex.json
