@@ -73,7 +73,9 @@ def atualizar_pokemon(ID,novo_nome,novo_tipo,novo_nivel):
     if novo_nivel < 1 or novo_nivel > 100:
         print("Nivel inválido")
         return
-    
+    if novo_tipo not in TIPOS_VALIDOS:
+        print("Tipo inválido!")
+        return
     with open("pokedex.json", "r") as f:
         pokemons = json.load(f)
     
