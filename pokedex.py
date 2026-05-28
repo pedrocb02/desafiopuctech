@@ -78,6 +78,11 @@ def atualizar_pokemon(ID,novo_nome,novo_tipo,novo_nivel):
 
     with open("pokedex.json", "w") as f:
         json.dump(pokemons, f, indent=4)
+#Limpar pokedex
+def limpar_pokedex():
+    with open("pokedex.json", "w") as f:
+        json.dump([], f, indent=4)
+    print("Pokédex limpa com sucesso!")
 
 def buscar_por_nome(nome):
     with open("pokedex.json", "r") as f:
@@ -114,6 +119,8 @@ def buscar_por_tipo(tipo):
             print(f"ID: {p['id']}, Nome: {p['nome']}, Tipo: {p['tipo']}, Nível: {p['nivel']}")
 
 def main():
+    limpar_pokedex()
+    adicionar_pokemon("Pikachu", "Eletrico", 35)
     listar_pokemons()
     atualizar_pokemon(1, "Pikachu", "Eletrico", 100)
     listar_pokemons()
