@@ -1,4 +1,9 @@
 import json
+TIPOS_VALIDOS = [
+    "Água", "Grama", "Fogo", "Elétrico", "Normal", "Voador",
+    "Inseto", "Venenoso", "Terrestre", "Pedra", "Gelo",
+    "Lutador", "Psíquico", "Fantasma", "Dragão", "Aço", "Sombrio", "Fada"
+]
 
 #tenta abrir um arquivo e se nao conseguir cria um arquivo .json
 try:
@@ -14,6 +19,9 @@ def adicionar_pokemon(nome, tipo, nivel):
     if nivel < 1 or nivel > 100:
         print("Nivel deve ser entre 1 e 100!")
         return 
+    if tipo not in TIPOS_VALIDOS:
+        print("Tipo inexistente!")
+        return
     with open("pokedex.json", "r") as f:
         pokemons = json.load(f)
     
@@ -65,6 +73,7 @@ def atualizar_pokemon(ID,novo_nome,novo_tipo,novo_nivel):
     if novo_nivel < 1 or novo_nivel > 100:
         print("Nivel inválido")
         return
+    
     with open("pokedex.json", "r") as f:
         pokemons = json.load(f)
     
