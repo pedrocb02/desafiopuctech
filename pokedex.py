@@ -95,7 +95,7 @@ def main():
         print("\n--- Menu ---")
         print("[1] Adicionar Pokémon")
         print("[2] Listar Pokémons")
-        print("[3] atualizar_pokemon Nível de um Pokémon")
+        print("[3] Editar Nível de um Pokémon")
         print("[4] Remover Pokémon")
         print("[5] Sair")
 
@@ -124,7 +124,7 @@ def main():
 
         elif escolha == "4":
             nome_remover = input("Digite o nome do Pokémon que deseja remover: ").strip()
-            remover(nome_remover)
+            remover_pokemon(nome_remover)
             pausar()
             limpar_terminal()
 
