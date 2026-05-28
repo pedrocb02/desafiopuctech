@@ -1,9 +1,5 @@
+
 import json
-TIPOS_VALIDOS = [
-    "Água", "Grama", "Fogo", "Elétrico", "Normal", "Voador",
-    "Inseto", "Venenoso", "Terrestre", "Pedra", "Gelo",
-    "Lutador", "Psíquico", "Fantasma", "Dragão", "Aço", "Sombrio", "Fada"
-]
 
 #tenta abrir um arquivo e se nao conseguir cria um arquivo .json
 try:
@@ -16,12 +12,7 @@ def adicionar_pokemon(nome, tipo, nivel):
     if not nome or not nome.strip():
         print("Nome não pode ser vazio!")
         return
-    if nivel < 1 or nivel > 100:
-        print("Nivel deve ser entre 1 e 100!")
-        return 
-    if tipo not in TIPOS_VALIDOS:
-        print("Tipo inexistente!")
-        return
+
     with open("pokedex.json", "r") as f:
         pokemons = json.load(f)
     
@@ -30,14 +21,14 @@ def adicionar_pokemon(nome, tipo, nivel):
     else:
         novo_id = pokemons[-1]["id"] + 1 #pega o ultimo ID da lista e soma 1
 
-    novo_pokemon = {
+    adicionar_pokemon = {
         "id": novo_id,
         "nome": nome,
         "tipo": tipo,
         "nivel": nivel
     }
     
-    pokemons.append(novo_pokemon)
+    pokemons.append(adicionar_pokemon)
     
     with open("pokedex.json", "w") as f:
         json.dump(pokemons, f, indent=4)
@@ -70,12 +61,7 @@ def atualizar_pokemon(ID,novo_nome,novo_tipo,novo_nivel):
     if not novo_nome or not novo_nome.strip():
         print("Nome não pode ser vazio!")
         return
-    if novo_nivel < 1 or novo_nivel > 100:
-        print("Nivel inválido")
-        return
-    if novo_tipo not in TIPOS_VALIDOS:
-        print("Tipo inválido!")
-        return
+
     with open("pokedex.json", "r") as f:
         pokemons = json.load(f)
     
@@ -93,58 +79,43 @@ def atualizar_pokemon(ID,novo_nome,novo_tipo,novo_nivel):
 
     with open("pokedex.json", "w") as f:
         json.dump(pokemons, f, indent=4)
-#Limpar pokedex
-def limpar_pokedex():
-    with open("pokedex.json", "w") as f:
-        json.dump([], f, indent=4)
-    print("Pokédex limpa com sucesso!")
-
-def buscar_por_nome(nome):
-    with open("pokedex.json", "r") as f:
-        pokemons = json.load(f)
-    
-    resultado = [p for p in pokemons if nome.lower() in p["nome"].lower()]
-    
-    if not resultado:
-        print(f"Nenhum pokémon encontrado com o nome '{nome}'!")
-    else:
-        quantidade = len(resultado)
-        if(quantidade == 1):
-            print(f"Foi encontrado {quantidade} pokémon com o nome '{nome}'!")
-        else:
-            print(f"Foram encontrados {quantidade} pokémon com o nome '{nome}'!")
-        for p in resultado:
-            print(f"ID: {p['id']}, Nome: {p['nome']}, Tipo: {p['tipo']}, Nível: {p['nivel']}")
-
-#Buscar pokemons
-def buscar_por_tipo(tipo):
-    with open("pokedex.json", "r") as f:
-        pokemons = json.load(f)
-    
-    resultado = [p for p in pokemons if p["tipo"].lower() == tipo.lower()]
-    
-    if not resultado:
-        print(f"Nenhum pokémon do tipo '{tipo}' encontrado!")
-    else:
-        if(len(resultado) == 1):
-            print(f"Foi encontrado 1 pokémon do tipo {tipo}!")
-        else:
-            print(f"Foram encontrados {len(resultado)} pokémon do tipo {tipo}!")
-        for p in resultado:
-            print(f"ID: {p['id']}, Nome: {p['nome']}, Tipo: {p['tipo']}, Nível: {p['nivel']}")
 
 def main():
-    limpar_pokedex()
-    adicionar_pokemon("Pikachu", "Eletrico", 35)
-    listar_pokemons()
-    atualizar_pokemon(1, "Pikachu", "Eletrico", 101)
-    listar_pokemons()
-    remover_pokemon(1)
-    listar_pokemons()
+    while True:
+        print("\n--- Menu ---")
+        print("[1] Adicionar Pokémon")
+        print("[2] Listar Pokémons")
+        print("[3] atualizar_pokemon Nível de um Pokémon")
+        print("[4] Remover Pokémon")
+        print("[5] Sair")
 
-    adicionar_pokemon("Pikachu", "Eletrico", 35)
-    adicionar_pokemon("Charmander", "Fogo", 10)
-    buscar_por_nome("pika")
-    buscar_por_tipo("Fogo")
+        escolha = input("Escolha a opção desejada: ")
 
-main()
+        if escolha == "1":
+            adicionar_pokemon()
+
+        elif escolha == "2":
+            listar_pokemons()
+
+        elif escolha == "3":
+            try:
+                nome_busca = input("Digite o nome do Pokémon que deseja atualizar_pokemon: ").strip()
+                campo_para_atualizar_pokemon = "nivel"
+                novo_valor = int(input("Digite o novo nível: "))
+                atualizar_pokemon(nome_busca, campo_para_atualizar_pokemon, novo_valor)
+            except ValueError:
+                print("Erro: O nível precisa ser um número inteiro válido.")
+
+        elif escolha == "4":
+            nome_remover = input("Digite o nome do Pokémon que deseja remover: ").strip()
+            remover(nome_remover)
+
+        elif escolha == "5":
+            print("Saindo...")
+            break
+
+        else:
+            print("Opção inválida. Tente novamente.")
+
+if __name__ == "__main__":
+    main()
