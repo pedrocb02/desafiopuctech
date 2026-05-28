@@ -80,6 +80,16 @@ def atualizar_pokemon(ID,novo_nome,novo_tipo,novo_nivel):
     with open("pokedex.json", "w") as f:
         json.dump(pokemons, f, indent=4)
 
+def limpar_terminal():
+    try:
+        from IPython.display import clear_output
+        clear_output(wait=True)
+    except ImportError:
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+def pausar():
+    input("Pressione Enter para continuar...")
+
 def main():
     while True:
         print("\n--- Menu ---")
@@ -93,9 +103,13 @@ def main():
 
         if escolha == "1":
             adicionar_pokemon()
+            pausar()
+            limpar_terminal()
 
         elif escolha == "2":
             listar_pokemons()
+            pausar()
+            limpar_terminal()
 
         elif escolha == "3":
             try:
@@ -103,12 +117,16 @@ def main():
                 campo_para_atualizar_pokemon = "nivel"
                 novo_valor = int(input("Digite o novo nível: "))
                 atualizar_pokemon(nome_busca, campo_para_atualizar_pokemon, novo_valor)
+                pausar()
+                limpar_terminal()
             except ValueError:
                 print("Erro: O nível precisa ser um número inteiro válido.")
 
         elif escolha == "4":
             nome_remover = input("Digite o nome do Pokémon que deseja remover: ").strip()
             remover(nome_remover)
+            pausar()
+            limpar_terminal()
 
         elif escolha == "5":
             print("Saindo...")
