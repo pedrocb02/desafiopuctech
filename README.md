@@ -19,3 +19,4 @@ Funcionalidades
 
 Divisão de Tarefas
 Pedro: Estrutura base do projeto e Busca por nome e tipo (feature/busca-pokemon)
+Ana: Validação dos dados do pokemon como nível e tipo (feature/Validacoes)
