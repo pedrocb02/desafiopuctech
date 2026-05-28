@@ -11,7 +11,9 @@ def adicionar_pokemon(nome, tipo, nivel):
     if not nome or not nome.strip():
         print("Nome não pode ser vazio!")
         return
-
+    if nivel < 1 or nivel > 100:
+        print("Nivel deve ser entre 1 e 100!")
+        return 
     with open("pokedex.json", "r") as f:
         pokemons = json.load(f)
     
