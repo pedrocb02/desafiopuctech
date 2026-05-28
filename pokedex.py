@@ -62,7 +62,9 @@ def atualizar_pokemon(ID,novo_nome,novo_tipo,novo_nivel):
     if not novo_nome or not novo_nome.strip():
         print("Nome não pode ser vazio!")
         return
-
+    if novo_nivel < 1 or novo_nivel > 100:
+        print("Nivel inválido")
+        return
     with open("pokedex.json", "r") as f:
         pokemons = json.load(f)
     
@@ -82,9 +84,9 @@ def atualizar_pokemon(ID,novo_nome,novo_tipo,novo_nivel):
         json.dump(pokemons, f, indent=4)
 
 def main():
-    adicionar_pokemon("Squirtle", "Agua", 5)
+    adicionar_pokemon("Squirtle", "Agua", -1)
     listar_pokemons()
-    atualizar_pokemon(1, "Pikachu", "Eletrico", 100)
+    atualizar_pokemon(1, "Pikachu", "Eletrico", 101)
     listar_pokemons()
     remover_pokemon(1)
     listar_pokemons()
