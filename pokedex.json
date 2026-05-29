@@ -1,1 +1,14 @@
-[]
+[
+    {
+        "id": 1,
+        "nome": "pikachu",
+        "tipo": "eletrico",
+        "nivel": 1
+    },
+    {
+        "id": 2,
+        "nome": "charmander",
+        "tipo": "1",
+        "nivel": 1
+    }
+]
